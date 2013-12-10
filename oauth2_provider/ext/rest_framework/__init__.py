@@ -1,2 +1,2 @@
 from .authentication import OAuth2Authentication
-from .permissions import TokenHasScope, TokenHasReadWriteScope, IsClientAuthenticated, IsResourceOwnerAuthenticated
+from .permissions import TokenHasScope, TokenHasReadWriteScope, OAuthTokenIsValid, OAuthTokenHasResourceOwner
