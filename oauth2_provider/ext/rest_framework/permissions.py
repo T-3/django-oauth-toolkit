@@ -11,7 +11,7 @@ log = logging.getLogger('oauth2_provider')
 
 SAFE_HTTP_METHODS = ['GET', 'HEAD', 'OPTIONS']
 
-class IsOauth2Authenticated(BasePermission):
+class IsOAuth2Authenticated(BasePermission):
     """
     The request is authenticated as either the client or as a resource owner.
     """
