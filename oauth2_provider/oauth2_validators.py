@@ -17,9 +17,10 @@ Application = get_application_model()
 log = logging.getLogger('oauth2_provider')
 
 GRANT_TYPE_MAPPING = {
-    'authorization_code': (Application.GRANT_AUTHORIZATION_CODE, Application.GRANT_CLIENT_CREDENTIALS,),
-    'password': (Application.GRANT_PASSWORD, Application.GRANT_CLIENT_CREDENTIALS,),
-    'client_credentials': (Application.GRANT_CLIENT_CREDENTIALS,),
+    'authorization_code': (Application.GRANT_AUTHORIZATION_CODE,),
+    'password': (Application.GRANT_PASSWORD,),
+    'client_credentials': (Application.GRANT_CLIENT_CREDENTIALS, Application.GRANT_AUTHORIZATION_CODE, 
+                           Application.GRANT_PASSWORD,),
     'refresh_token': (Application.GRANT_AUTHORIZATION_CODE, Application.GRANT_PASSWORD,
                       Application.GRANT_CLIENT_CREDENTIALS)
 }
