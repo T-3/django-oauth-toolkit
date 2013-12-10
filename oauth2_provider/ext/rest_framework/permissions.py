@@ -11,6 +11,19 @@ log = logging.getLogger('oauth2_provider')
 
 SAFE_HTTP_METHODS = ['GET', 'HEAD', 'OPTIONS']
 
+class IsOauth2Authenticated(BasePermission):
+    """
+    The request is authenticated as either the client or as a resource owner.
+    """
+
+    def has_permission(self, request, view):
+        token = request.auth
+
+        if not token:
+            return False
+
+        return token.is_valid()
+
 
 class TokenHasScope(BasePermission):
     """
