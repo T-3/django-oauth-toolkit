@@ -223,7 +223,10 @@ class OAuth2Validator(RequestValidator):
         Validate both grant_type is a valid string and grant_type is allowed for current workflow
         """
         assert(grant_type in GRANT_TYPE_MAPPING)  # mapping misconfiguration
-        return request.client.authorization_grant_type in GRANT_TYPE_MAPPING[grant_type]
+        # HACK - allow any grant type from any application type
+        return gant_type in GRANT_TYPE_MAPPING
+        
+        #return request.client.authorization_grant_type in GRANT_TYPE_MAPPING[grant_type]
 
     def validate_response_type(self, client_id, response_type, client, request, *args, **kwargs):
         """
