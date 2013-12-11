@@ -144,6 +144,7 @@ class TokenView(CsrfExemptMixin, OAuthLibMixin, View):
                 if user:
                     response_dict['user_id'] = user.id
                     response_dict['email'] = user.email
+                    body = json.dumps(response_dict)
 
 
 
