@@ -224,7 +224,7 @@ class OAuth2Validator(RequestValidator):
         """
         assert(grant_type in GRANT_TYPE_MAPPING)  # mapping misconfiguration
         # HACK - allow any grant type from any application type
-        return gant_type in GRANT_TYPE_MAPPING
+        return grant_type in GRANT_TYPE_MAPPING
         
         #return request.client.authorization_grant_type in GRANT_TYPE_MAPPING[grant_type]
 
@@ -234,9 +234,13 @@ class OAuth2Validator(RequestValidator):
         rfc:`8.4`, so validate the response_type only if it matches 'code' or 'token'
         """
         if response_type == 'code':
-            return client.authorization_grant_type == Application.GRANT_AUTHORIZATION_CODE
+            # HACK - allow any grant type from any application type
+            return True
+            #return client.authorization_grant_type == Application.GRANT_AUTHORIZATION_CODE
         elif response_type == 'token':
-            return client.authorization_grant_type == Application.GRANT_IMPLICIT
+            # HACK - allow any grant type from any application type
+            return True
+            #return client.authorization_grant_type == Application.GRANT_IMPLICIT
         else:
             return False
 
