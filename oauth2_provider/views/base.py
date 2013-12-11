@@ -132,6 +132,22 @@ class TokenView(CsrfExemptMixin, OAuthLibMixin, View):
 
     def post(self, request, *args, **kwargs):
         url, headers, body, status = self.create_token_response(request)
+        
+
+        # HACK - there has got to be a better way to add elements to the auth token
+        if status == 200:
+            import json
+            response_dict = json.loads(body)
+            if 'access_token' in response_dict:
+                from ..models import AccessToken()
+                user = AccessToken.objects.filter(token=response_dict['access_token']).first().user
+                if user:
+                    response_dict['user_id'] = user.id
+                    response_dict['email'] = user.email
+
+
+
+
         response = HttpResponse(content=body, status=status)
 
         for k, v in headers.items():
