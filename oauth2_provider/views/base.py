@@ -142,7 +142,7 @@ class TokenView(CsrfExemptMixin, OAuthLibMixin, View):
                 from ..models import AccessToken
                 user = AccessToken.objects.filter(token=response_dict['access_token']).first().user
                 if user:
-                    response_dict['user_id'] = user.id
+                    response_dict['user_id'] = str(user.id)
                     response_dict['email'] = user.email
                     response_dict['member_id'] = user.member_id
                     body = json.dumps(response_dict)
